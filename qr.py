@@ -10,6 +10,7 @@ __status__ = 'prototype'
 
 
 from cStringIO import StringIO
+from urllib import unquote
 from zipfile import ZipFile
 from zipfile import ZIP_DEFLATED
 
@@ -72,7 +73,7 @@ def cut_and_pack(img):
 
 @app.route('/qr-code-img')
 def full_image():
-    img = gen_thumbnail_qr(request.args['data'])
+    img = gen_thumbnail_qr(unquote(request.args['data']))
     draw_white_bars(img)
     png_data = StringIO()
     img.save(png_data, 'png')
@@ -88,7 +89,7 @@ def full_image():
 
 @app.route('/qr-code-zip')
 def zip_image():
-    img = gen_thumbnail_qr(request.args['data'])
+    img = gen_thumbnail_qr(unquote(request.args['data']))
     zip_file = cut_and_pack(img)
     return Response(
         zip_file,
