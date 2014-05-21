@@ -9,6 +9,8 @@ __maintainer__ = 'Shi Wei'
 __status__ = 'prototype'
 
 
+import logging
+
 from cStringIO import StringIO
 from urllib import unquote
 from zipfile import ZipFile
@@ -38,9 +40,11 @@ ZIP_NAME = 'qr-code/{0}.png'
 
 
 app = Flask(__name__)
+logger = logging.getLogger(__name__)
 
 
 def gen_thumbnail_qr(data):
+    logger.info('encode data [{0}] to qr'.format(data))
     qr = QRCode(
         version=2,
         error_correction=ERROR_CORRECT_H,
