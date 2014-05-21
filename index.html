@@ -77,6 +77,7 @@
             } catch(err) {}
           </script>
           <script>
+            var host = "chulai.la:8888";
             var http_regex = /^https?:\/\//;
             $("#qr-form").submit(function() {
                 return false;
@@ -91,9 +92,9 @@
               data = encodeURIComponent(data);
               $("#qr-box").html(
                   '<div>' +
-                    '<img src="http://localhost:5000/qr-code-img?data='+ data + '">' +
+                    '<img src="http://' + host + '/qr-code-img?data='+ data + '">' +
                   '</div>' +
-                  '<a href="http://localhost:5000/qr-code-zip?data='+ data + '"> Download as zip</a>'
+                  '<a href="http://' + host + '/qr-code-zip?data='+ data + '"> Download as zip</a>'
               );
             })
           </script>
